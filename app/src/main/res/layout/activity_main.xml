@@ -58,11 +58,9 @@
                 android:layout_height="wrap_content"
                 android:text="Déblocage"
                 android:id="@+id/buttonUnlock"
-                android:layout_below="@+id/editTextPass"
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/editTextPass"
-                android:layout_toStartOf="@+id/editTextPass"
-                android:layout_marginLeft="25dp"/>
+                android:layout_below="@+id/textViewPass"
+                android:layout_alignRight="@+id/CheckboxRecord"
+                android:layout_alignEnd="@+id/CheckboxRecord" />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,8 +73,9 @@
                 android:layout_height="wrap_content"
                 android:text="Stop"
                 android:id="@+id/buttonStop"
-                android:layout_alignTop="@+id/buttonStart"
-                android:layout_alignRight="@+id/buttonUnlock"/>
+                android:layout_above="@+id/CheckboxRecord"
+                android:layout_alignRight="@+id/editTextPass"
+                android:layout_alignEnd="@+id/editTextPass" />
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
