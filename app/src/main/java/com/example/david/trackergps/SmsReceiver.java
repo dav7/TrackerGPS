@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver {
     private static final String TAG = "SMSBroadcastReceiver";
-
+    private ServiceLock mMonService;
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "Intent recieved:" + intent.getAction());
+        Log.i(TAG, "Intent received:" + intent.getAction());
 
         if (intent.getAction() == Telephony.Sms.Intents.SMS_RECEIVED_ACTION) {
             Bundle bundle = intent.getExtras();
@@ -31,7 +31,7 @@ public class SmsReceiver extends BroadcastReceiver {
                             pdus[i], info);
                 }
                 if (messages.length > -1) {
-                    Log.i(TAG, "MESSAGE Recieved: " + messages[0].getMessageBody());
+                    Log.i(TAG, "MESSAGE Received: " + messages[0].getMessageBody());
                     Toast.makeText(context, messages[0].getMessageBody(), Toast.LENGTH_LONG).show();
                     checkSMS(messages[0].getMessageBody(), context);
                 }
@@ -43,9 +43,15 @@ public class SmsReceiver extends BroadcastReceiver {
         void checkSMS(String SMS,Context context) {
         // Stoppe la reception des SMS : ! Attention le système n'est plus pilotable !
 
-        if(SMS.equals("STOP")) {
-            LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
+        if(SMS.equals("StopService")) {
+            broadCastMessage(context,"StopService");
+
         }
     }
-
+private void broadCastMessage (Context context,String msg) {
+    Log.d(TAG,"Broadcasting message");
+    Intent intent = new Intent("lockMyPhone");
+    intent.putExtra("message", msg);
+    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+}
 }
